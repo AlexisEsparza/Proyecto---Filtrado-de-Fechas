@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="dbFiltroFechasVideoModelStoreContainer" CdmEntityContainer="dbFiltroFechasVideoEntities">
+    <EntitySetMapping Name="tblCliente">
+      <EntityTypeMapping TypeName="dbFiltroFechasVideoModel.tblCliente">
+        <MappingFragment StoreEntitySet="tblCliente">
+          <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+          <ScalarProperty Name="nombreCliente" ColumnName="nombreCliente" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblContrato">
+      <EntityTypeMapping TypeName="dbFiltroFechasVideoModel.tblContrato">
+        <MappingFragment StoreEntitySet="tblContrato">
+          <ScalarProperty Name="idContrato" ColumnName="idContrato" />
+          <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+          <ScalarProperty Name="montoContrato" ColumnName="montoContrato" />
+          <ScalarProperty Name="fechaContrato" ColumnName="fechaContrato" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="BuscarContratos" FunctionName="dbFiltroFechasVideoModel.Store.BuscarContratos">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="dbFiltroFechasVideoModel.BuscarContratos_Result">
+          <ScalarProperty Name="idContrato" ColumnName="idContrato" />
+          <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+          <ScalarProperty Name="montoContrato" ColumnName="montoContrato" />
+          <ScalarProperty Name="fechaContrato" ColumnName="fechaContrato" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="buscar" FunctionName="dbFiltroFechasVideoModel.Store.BuscarContratos" />
+  </EntityContainerMapping>
+</Mapping>

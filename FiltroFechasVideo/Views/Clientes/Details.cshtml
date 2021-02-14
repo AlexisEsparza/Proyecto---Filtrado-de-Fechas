@@ -1,0 +1,25 @@
+﻿@model FiltroFechasVideo.Models.tblCliente
+
+@{
+    ViewBag.Title = "Detalles";
+}
+
+<h2>Detalle del cliente</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.nombreCliente)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nombreCliente)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.idCliente }) |
+    @Html.ActionLink("Regresar", "Index")
+</p>

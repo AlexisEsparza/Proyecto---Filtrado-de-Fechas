@@ -1,0 +1,33 @@
+﻿@model IEnumerable<FiltroFechasVideo.Models.tblCliente>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Lista de Clientes</h2>
+
+<p>
+    @Html.ActionLink("Crear Nuevo", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.nombreCliente)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.nombreCliente)
+        </td>
+        <td>
+            @Html.ActionLink("Editar", "Edit", new { id=item.idCliente }) |
+            @Html.ActionLink("Detalles", "Details", new { id=item.idCliente }) |
+            @Html.ActionLink("Eliminar", "Delete", new { id=item.idCliente })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,50 @@
+﻿@model IEnumerable<FiltroFechasVideo.Models.ViewModels.SumaContratos>
+
+@{
+    ViewBag.Title = "Lista de Contratos";
+}
+
+<h2>Lista de Contratos</h2>
+<p></p>
+<p></p>
+<p>
+    @Html.ActionLink("Crear Nuevo", "Create")
+</p>
+<p></p>
+<p></p>
+@using (Html.BeginForm("Index", "Contrato", FormMethod.Post))
+{
+    <label>Desde:&nbsp;</label><input type="date" name="Desde" />
+    <label>Hasta:&nbsp;</label><input type="date" name="Hasta" />
+    <label>Hasta:&nbsp;</label><input type="submit" value="Buscar" />
+}
+<p></p>
+<p></p>
+<p>
+    @Html.ActionLink("Mostrar todos", "Index")
+</p>
+
+<table class="table">
+
+    <tr>
+        <th>
+            @Html.DisplayName("Cliente")
+        </th>
+        <th>
+            @Html.DisplayName("Monto")
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MontoContrato)
+            </td>
+        </tr>
+    }
+</table>
+

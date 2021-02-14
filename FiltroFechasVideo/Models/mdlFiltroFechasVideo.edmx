@@ -1,0 +1,163 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="dbFiltroFechasVideoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tblCliente">
+          <Key>
+            <PropertyRef Name="idCliente" />
+          </Key>
+          <Property Name="idCliente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombreCliente" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblContrato">
+          <Key>
+            <PropertyRef Name="idContrato" />
+          </Key>
+          <Property Name="idContrato" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idCliente" Type="int" Nullable="false" />
+          <Property Name="montoContrato" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="fechaContrato" Type="datetime" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__tblContra__idCli__286302EC">
+          <End Role="tblCliente" Type="Self.tblCliente" Multiplicity="1" />
+          <End Role="tblContrato" Type="Self.tblContrato" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCliente">
+              <PropertyRef Name="idCliente" />
+            </Principal>
+            <Dependent Role="tblContrato">
+              <PropertyRef Name="idCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="BuscarContratos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Fromdate" Type="datetime" Mode="In" />
+          <Parameter Name="Todate" Type="datetime" Mode="In" />
+        </Function>
+        <EntityContainer Name="dbFiltroFechasVideoModelStoreContainer">
+          <EntitySet Name="tblCliente" EntityType="Self.tblCliente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblContrato" EntityType="Self.tblContrato" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__tblContra__idCli__286302EC" Association="Self.FK__tblContra__idCli__286302EC">
+            <End Role="tblCliente" EntitySet="tblCliente" />
+            <End Role="tblContrato" EntitySet="tblContrato" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="dbFiltroFechasVideoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tblCliente">
+          <Key>
+            <PropertyRef Name="idCliente" />
+          </Key>
+          <Property Name="idCliente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombreCliente" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tblContrato" Relationship="Self.FK__tblContra__idCli__286302EC" FromRole="tblCliente" ToRole="tblContrato" />
+        </EntityType>
+        <EntityType Name="tblContrato">
+          <Key>
+            <PropertyRef Name="idContrato" />
+          </Key>
+          <Property Name="idContrato" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idCliente" Type="Int32" Nullable="false" />
+          <Property Name="montoContrato" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="fechaContrato" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="tblCliente" Relationship="Self.FK__tblContra__idCli__286302EC" FromRole="tblContrato" ToRole="tblCliente" />
+        </EntityType>
+        <Association Name="FK__tblContra__idCli__286302EC">
+          <End Role="tblCliente" Type="Self.tblCliente" Multiplicity="1" />
+          <End Role="tblContrato" Type="Self.tblContrato" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCliente">
+              <PropertyRef Name="idCliente" />
+            </Principal>
+            <Dependent Role="tblContrato">
+              <PropertyRef Name="idCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="dbFiltroFechasVideoEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tblCliente" EntityType="Self.tblCliente" />
+          <EntitySet Name="tblContrato" EntityType="Self.tblContrato" />
+          <AssociationSet Name="FK__tblContra__idCli__286302EC" Association="Self.FK__tblContra__idCli__286302EC">
+            <End Role="tblCliente" EntitySet="tblCliente" />
+            <End Role="tblContrato" EntitySet="tblContrato" />
+          </AssociationSet>
+          <FunctionImport Name="BuscarContratos" ReturnType="Collection(dbFiltroFechasVideoModel.BuscarContratos_Result)">
+            <Parameter Name="Fromdate" Mode="In" Type="DateTime" />
+            <Parameter Name="Todate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="buscar" EntitySet="tblContrato" ReturnType="Collection(dbFiltroFechasVideoModel.tblContrato)">
+            <Parameter Name="Fromdate" Mode="In" Type="DateTime" />
+            <Parameter Name="Todate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="BuscarContratos_Result">
+          <Property Type="Int32" Name="idContrato" Nullable="false" />
+          <Property Type="Int32" Name="idCliente" Nullable="false" />
+          <Property Type="Decimal" Name="montoContrato" Nullable="false" Precision="18" Scale="2" />
+          <Property Type="DateTime" Name="fechaContrato" Nullable="false" Precision="23" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="dbFiltroFechasVideoModelStoreContainer" CdmEntityContainer="dbFiltroFechasVideoEntities">
+          <EntitySetMapping Name="tblCliente">
+            <EntityTypeMapping TypeName="dbFiltroFechasVideoModel.tblCliente">
+              <MappingFragment StoreEntitySet="tblCliente">
+                <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+                <ScalarProperty Name="nombreCliente" ColumnName="nombreCliente" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblContrato">
+            <EntityTypeMapping TypeName="dbFiltroFechasVideoModel.tblContrato">
+              <MappingFragment StoreEntitySet="tblContrato">
+                <ScalarProperty Name="idContrato" ColumnName="idContrato" />
+                <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+                <ScalarProperty Name="montoContrato" ColumnName="montoContrato" />
+                <ScalarProperty Name="fechaContrato" ColumnName="fechaContrato" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="BuscarContratos" FunctionName="dbFiltroFechasVideoModel.Store.BuscarContratos">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="dbFiltroFechasVideoModel.BuscarContratos_Result">
+                <ScalarProperty Name="idContrato" ColumnName="idContrato" />
+                <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+                <ScalarProperty Name="montoContrato" ColumnName="montoContrato" />
+                <ScalarProperty Name="fechaContrato" ColumnName="fechaContrato" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="buscar" FunctionName="dbFiltroFechasVideoModel.Store.BuscarContratos" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,98 @@
+﻿@model IEnumerable<FiltroFechasVideo.Models.tblContrato>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Contratos</h2>
+<p></p>
+<p></p>
+<p>
+    @Html.ActionLink("Crear Nuevo", "Create")
+</p>
+<p></p>
+<p></p>
+@using (Html.BeginForm("Index", "Contrato", FormMethod.Post))
+{
+    <label>Desde:&nbsp;</label><input type="date" name="Desde"  />
+    <label>Hasta:&nbsp;</label><input type="date" name="Hasta"  />
+    <label>Hasta:&nbsp;</label><input type="submit" value="Buscar" />
+}
+<p></p>
+<p></p>
+<p>
+    @Html.ActionLink("Mostrar todos", "Index")
+</p>
+<p></p>
+<table class="table">
+
+    <tr>
+        <th>
+            @Html.DisplayName("Cliente")
+        </th>
+        <th>
+            @Html.DisplayName("Monto")
+        </th>
+        <th>
+            @Html.DisplayName("Fecha")
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.tblCliente.nombreCliente)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.montoContrato)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fechaContrato)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Edit", new { id = item.idContrato }) |
+                @Html.ActionLink("Detalles", "Details", new { id = item.idContrato }) |
+                @Html.ActionLink("Eliminar", "Delete", new { id = item.idContrato })
+            </td>
+        </tr>
+    }
+
+</table>
+
+@*<table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.montoContrato)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fechaContrato)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.tblCliente.nombreCliente)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.montoContrato)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.fechaContrato)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.tblCliente.nombreCliente)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.idContrato }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.idContrato }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.idContrato })
+                </td>
+            </tr>
+        }
+
+    </table>*@

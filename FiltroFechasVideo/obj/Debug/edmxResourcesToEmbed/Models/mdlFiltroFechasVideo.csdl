@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="dbFiltroFechasVideoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="tblCliente">
+    <Key>
+      <PropertyRef Name="idCliente" />
+    </Key>
+    <Property Name="idCliente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombreCliente" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="tblContrato" Relationship="Self.FK__tblContra__idCli__286302EC" FromRole="tblCliente" ToRole="tblContrato" />
+  </EntityType>
+  <EntityType Name="tblContrato">
+    <Key>
+      <PropertyRef Name="idContrato" />
+    </Key>
+    <Property Name="idContrato" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idCliente" Type="Int32" Nullable="false" />
+    <Property Name="montoContrato" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="fechaContrato" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="tblCliente" Relationship="Self.FK__tblContra__idCli__286302EC" FromRole="tblContrato" ToRole="tblCliente" />
+  </EntityType>
+  <Association Name="FK__tblContra__idCli__286302EC">
+    <End Role="tblCliente" Type="Self.tblCliente" Multiplicity="1" />
+    <End Role="tblContrato" Type="Self.tblContrato" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblCliente">
+        <PropertyRef Name="idCliente" />
+      </Principal>
+      <Dependent Role="tblContrato">
+        <PropertyRef Name="idCliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="dbFiltroFechasVideoEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="tblCliente" EntityType="Self.tblCliente" />
+    <EntitySet Name="tblContrato" EntityType="Self.tblContrato" />
+    <AssociationSet Name="FK__tblContra__idCli__286302EC" Association="Self.FK__tblContra__idCli__286302EC">
+      <End Role="tblCliente" EntitySet="tblCliente" />
+      <End Role="tblContrato" EntitySet="tblContrato" />
+    </AssociationSet>
+    <FunctionImport Name="BuscarContratos" ReturnType="Collection(dbFiltroFechasVideoModel.BuscarContratos_Result)">
+      <Parameter Name="Fromdate" Mode="In" Type="DateTime" />
+      <Parameter Name="Todate" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="buscar" EntitySet="tblContrato" ReturnType="Collection(dbFiltroFechasVideoModel.tblContrato)">
+      <Parameter Name="Fromdate" Mode="In" Type="DateTime" />
+      <Parameter Name="Todate" Mode="In" Type="DateTime" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="BuscarContratos_Result">
+    <Property Type="Int32" Name="idContrato" Nullable="false" />
+    <Property Type="Int32" Name="idCliente" Nullable="false" />
+    <Property Type="Decimal" Name="montoContrato" Nullable="false" Precision="18" Scale="2" />
+    <Property Type="DateTime" Name="fechaContrato" Nullable="false" Precision="23" />
+  </ComplexType>
+</Schema>

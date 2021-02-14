@@ -1,0 +1,41 @@
+﻿@model FiltroFechasVideo.Models.tblContrato
+
+@{
+    ViewBag.Title = "Detalles";
+}
+
+<h2>Detalle del Contrato</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.montoContrato)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.montoContrato)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fechaContrato)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fechaContrato)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tblCliente.nombreCliente)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tblCliente.nombreCliente)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.idContrato }) |
+    @Html.ActionLink("Regresar", "Index")
+</p>
